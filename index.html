@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>John Schmidt | Fullstack Developer</title>
+    <!-- Google Font - Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* CSS Variables based on your color palette */
+        :root {
+            --color-primary-yellow: #F7DD00;
+            --color-accent-teal: #6FC7B1;
+            --color-accent-coral: #F39A87;
+            --color-dark-grey: #282A29;
+            --color-mid-grey: #969696;
+            --color-light-grey: #FFFFFF;
+            --bg-color: #282A29;
+            --card-bg-color: #383a38;
+        }
+
+        /* General Body and Typography */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--color-light-grey);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        /* Custom scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-color);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--color-mid-grey);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--color-accent-teal);
+        }
+
+        /* Utility classes for layout and spacing */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .py-16 { padding-top: 4rem; padding-bottom: 4rem; }
+        .py-8 { padding-top: 2rem; padding-bottom: 2rem; }
+        .py-12 { padding-top: 3rem; padding-bottom: 3rem; }
+        .md\:py-24 { padding-top: 6rem; padding-bottom: 6rem; }
+        .mb-16 { margin-bottom: 4rem; }
+        .mb-8 { margin-bottom: 2rem; }
+        .mb-6 { margin-bottom: 1.5rem; }
+        .mb-4 { margin-bottom: 1rem; }
+        .mb-2 { margin-bottom: 0.5rem; }
+        .mt-4 { margin-top: 1rem; }
+
+        /* Header & Hero Section */
+        header {
+            background-color: var(--bg-color);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+
+        .profile-img {
+            border-radius: 50%;
+            border: 4px solid var(--color-primary-yellow);
+            width: 160px;
+            height: 160px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            margin-bottom: 1.5rem;
+        }
+
+        .profile-img:hover {
+            transform: scale(1.05);
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--color-light-grey);
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.025em;
+        }
+        
+        .hero-tagline {
+            font-size: 1.5rem;
+            color: var(--color-accent-teal);
+            font-weight: 500;
+            letter-spacing: 0.025em;
+        }
+
+        .social-links a {
+            color: var(--color-light-grey);
+            transition: color 0.2s ease;
+        }
+        .social-links a:hover {
+            color: var(--color-primary-yellow);
+        }
+
+        /* Main Content and Sections */
+        .section-title {
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: var(--color-primary-yellow);
+            margin-bottom: 2rem;
+            text-align: center;
+            border-bottom: 2px solid var(--color-mid-grey);
+            padding-bottom: 1rem;
+        }
+        
+        /* The main containers for sections no longer have backgrounds or borders */
+        .section-content {
+            padding: 2rem;
+            border-radius: 1rem;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--color-light-grey);
+            margin-bottom: 0.5rem;
+        }
+
+        .card-subtitle {
+            color: var(--color-accent-teal);
+        }
+
+        .card-text {
+            color: var(--color-light-grey);
+            line-height: 1.5;
+        }
+        
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            gap: 2rem;
+        }
+        .project-card {
+            background-color: var(--card-bg-color);
+            border-radius: 1rem;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .project-card img {
+            width: 100%;
+            height: 12rem;
+            object-fit: cover;
+            border-top-left-radius: 1rem;
+            border-top-right-radius: 1rem;
+        }
+        .project-card-content {
+            padding: 1.5rem;
+        }
+        .project-card-links a {
+            color: var(--color-primary-yellow);
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+        .project-card-links a:hover {
+            color: var(--color-accent-teal);
+        }
+
+        /* Skills Section */
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            padding-top: 1rem;
+        }
+        .skill-tag {
+            background-color: var(--color-accent-teal);
+            color: var(--bg-color);
+            padding: 0.5rem 1rem;
+            border-radius: 9999px; /* Fully rounded pill shape */
+            font-weight: 500;
+            font-size: 0.875rem;
+            transition: background-color 0.2s ease;
+        }
+        .skill-tag:hover {
+            background-color: var(--color-accent-coral);
+            color: var(--bg-color);
+        }
+
+        /* Experience and Education List Items */
+        .list-item {
+            padding-bottom: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--color-mid-grey);
+        }
+        .list-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--bg-color);
+            text-align: center;
+            padding: 2rem 0;
+            color: var(--color-mid-grey);
+            font-size: 0.875rem;
+        }
+
+        /* Responsive Design */
+        @media (min-width: 768px) {
+            .projects-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+            .hero-title {
+                font-size: 4rem;
+            }
+            .hero-tagline {
+                font-size: 1.875rem;
+            }
+            .py-12 { padding-top: 6rem; padding-bottom: 6rem; }
+        }
+
+        @media (min-width: 1024px) {
+            .projects-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+            .hero-title {
+                font-size: 4.5rem;
+            }
+            .hero-tagline {
+                font-size: 2rem;
+            }
+            .py-12 { padding-top: 8rem; padding-bottom: 8rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header & Hero Section -->
+    <header class="py-12">
+        <div class="container">
+            <div style="display: flex; flex-direction: column; align-items: center;">
+                <img 
+                    src="https://placehold.co/160x160/F7DD00/282A29?text=JS" 
+                    alt="John Schmidt Profile" 
+                    class="profile-img"
+                    onerror="this.src='https://placehold.co/160x160/F7DD00/282A29?text=JS'"
+                >
+                <h1 class="hero-title">John Schmidt</h1>
+                <p class="hero-tagline">Fullstack Developer and former student affairs professional</p>
+                <div class="social-links" style="margin-top: 1.5rem; display: flex; gap: 1rem;">
+                    <a href="#" target="_blank"><i class="fab fa-github fa-2x"></i></a>
+                    <a href="#" target="_blank"><i class="fab fa-linkedin-in fa-2x"></i></a>
+                    <a href="#" target="_blank"><i class="fab fa-twitter fa-2x"></i></a>
+                    <a href="mailto:john@jpschmid.dev"><i class="fas fa-envelope fa-2x"></i></a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container py-16">
+
+        <!-- About Me Section -->
+        <section id="about" class="mb-16">
+            <h2 class="section-title">About Me</h2>
+            <div class="section-content">
+                <p class="card-text">
+                   
+                </p>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="mb-16">
+            <h2 class="section-title">Experience</h2>
+            <div class="section-content" style="display: flex; flex-direction: column; gap: 2rem;">
+                <!-- Experience Card 1 -->
+                <div class="list-item">
+                    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start;">
+                        <div>
+                            <h3 class="card-title">Web Developer</h3>
+                            <p class="card-subtitle">Macalester College, St. Paul, Minnesota</p>
+                        </div>
+                        <p class="card-text" style="font-size: 0.875rem; color: var(--color-mid-grey); margin-top: 0.5rem;">March 2023 - PRESENT</p>
+                    </div>
+                    <ul style="list-style-type: disc; padding-left: 1.5rem; color: var(--color-light-grey); font-size: 0.875rem;">
+                        <li>Manage a 200+ site WordPress network, developing and maintaining themes.</li>
+                        <li>Develop native apps with Expo/Firebase and Macalester web apps in Python/React/Django/Go.</li>
+                        <li>Supervise web developers and assist with web accessibility.</li>
+                    </ul>
+                </div>
+                <!-- Experience Card 2 -->
+                <div class="list-item">
+                    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start;">
+                        <div>
+                            <h3 class="card-title">Web Developer</h3>
+                            <p class="card-subtitle">Surge Communication, Remote</p>
+                        </div>
+                        <p class="card-text" style="font-size: 0.875rem; color: var(--color-mid-grey); margin-top: 0.5rem;">Nov 2019 - PRESENT</p>
+                    </div>
+                    <ul style="list-style-type: disc; padding-left: 1.5rem; color: var(--color-light-grey); font-size: 0.875rem;">
+                        <li>Developed and managed custom Next.js and WordPress websites.</li>
+                        <li>Act as the primary IT contact and subject matter expert for all client inquiries.</li>
+                    </ul>
+                </div>
+                <!-- Experience Card 3 -->
+                <div class="list-item">
+                    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start;">
+                        <div>
+                            <h3 class="card-title">Front End Developer</h3>
+                            <p class="card-subtitle">Triton Commerce, Minneapolis, Minnesota</p>
+                        </div>
+                        <p class="card-text" style="font-size: 0.875rem; color: var(--color-mid-grey); margin-top: 0.5rem;">May 2022 - March 2023</p>
+                    </div>
+                    <ul style="list-style-type: disc; padding-left: 1.5rem; color: var(--color-light-grey); font-size: 0.875rem;">
+                        <li>Oversaw the complete web development lifecycle, converting Photoshop designs into responsive websites and optimizing existing properties.</li>
+                        <li>Developed custom, reusable components for the agency's framework, improving efficiency and consistency.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="mb-16">
+            <h2 class="section-title">My Projects</h2>
+            <div class="projects-grid">
+                <!-- New Project Card - MacNav -->
+                <div class="project-card">
+                    <img 
+                        src="https://placehold.co/600x400/F7DD00/282A29?text=MacNav" 
+                        alt="MacNav App" 
+                        onerror="this.src='https://placehold.co/600x400/F7DD00/282A29?text=MacNav'"
+                    >
+                    <div class="project-card-content">
+                        <h3 class="card-title">MacNav</h3>
+                        <p class="card-text" style="font-size: 0.875rem; margin-bottom: 1rem;">
+                            The official student app for Macalester College. Developed to help students navigate campus, find events, view dining hall menus, and access important resources. An iterative app with continuous updates based on student feedback.
+                        </p>
+                        <div class="project-card-links" style="display: flex; gap: 1rem;">
+                            <a href="https://www.macalester.edu/macnav/" target="_blank"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                            <a href="#" target="_blank"><i class="fab fa-github"></i>Code samples provided upon request</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project Card 1 (Original Placeholder) -->
+                <!-- <div class="project-card">
+                    <img 
+                        src="https://placehold.co/600x400/F7DD00/282A29?text=Project+1" 
+                        alt="Project 1" 
+                        onerror="this.src='https://placehold.co/600x400/F7DD00/282A29?text=Project+1'"
+                    >
+                    <div class="project-card-content">
+                        <h3 class="card-title">Project Title 1</h3>
+                        <p class="card-text" style="font-size: 0.875rem; margin-bottom: 1rem;">
+                        </p>
+                        <div class="project-card-links" style="display: flex; gap: 1rem;">
+                            <a href="#" target="_blank"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                            <a href="#" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                        </div>
+                    </div>
+                </div> -->
+
+                <!-- Project Card 2 (Original Placeholder) -->
+                <!-- <div class="project-card">
+                    <img 
+                        src="https://placehold.co/600x400/F7DD00/282A29?text=Project+2" 
+                        alt="Project 2" 
+                        onerror="this.src='https://placehold.co/600x400/F7DD00/282A29?text=Project+2'"
+                    >
+                    <div class="project-card-content">
+                        <h3 class="card-title">Project Title 2</h3>
+                        <p class="card-text" style="font-size: 0.875rem; margin-bottom: 1rem;">
+                        </p>
+                        <div class="project-card-links" style="display: flex; gap: 1rem;">
+                            <a href="#" target="_blank"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                            <a href="#" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="mb-16">
+            <h2 class="section-title">Skills</h2>
+            <div class="section-content">
+                <div class="skills-container">
+                    <span class="skill-tag">Typescript</span>
+                    <span class="skill-tag">NodeJS</span>
+                    <span class="skill-tag">Golang</span>
+                    <span class="skill-tag">PHP</span>
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">C#</span>
+                    <span class="skill-tag">React</span>
+                    <span class="skill-tag">React Native</span>
+                    <span class="skill-tag">Vue</span>
+                    <span class="skill-tag">SQL</span>
+                    <span class="skill-tag">MongoDB</span>
+                    <span class="skill-tag">Google Data Connect</span>
+                    <span class="skill-tag">Google Cloud Run</span>
+                    <span class="skill-tag">Expo</span>
+                    <span class="skill-tag">Cloudflare Wordpress hosting</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section id="education" class="mb-16">
+            <h2 class="section-title">Education</h2>
+            <div class="section-content" style="display: flex; flex-direction: column; gap: 1.5rem;">
+                <!-- Education Entry 1 -->
+                <div class="list-item">
+                    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start;">
+                        <div>
+                            <h3 class="card-title">Master of Education, Higher Education Administration</h3>
+                            <p class="card-subtitle">Texas Tech University, Lubbock, Texas</p>
+                        </div>
+                        <p class="card-text" style="font-size: 0.875rem; color: var(--color-mid-grey); margin-top: 0.5rem;">July 2014 - August 2016</p>
+                    </div>
+                </div>
+                <!-- Education Entry 2 -->
+                <div class="list-item">
+                    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start;">
+                        <div>
+                            <h3 class="card-title">Bachelors of Science in Journalism</h3>
+                            <p class="card-subtitle">South Dakota State University, Brookings, South Dakota</p>
+                        </div>
+                        <p class="card-text" style="font-size: 0.875rem; color: var(--color-mid-grey); margin-top: 0.5rem;">August 2009 - May 2014</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 John Schmidt. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
